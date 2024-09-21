@@ -91,7 +91,7 @@ export const loginUser = async (req, res) => {
             {expiresIn: '1h'},
             (error, token) => {
                 if(error) throw error;
-                res.json({token});       
+                res.json({message: "Login Successful!", token});       
             }
         )
 
@@ -101,4 +101,8 @@ export const loginUser = async (req, res) => {
         console.error(error.message);
         res.status(500).send("Server Error");
     }
+}
+
+export const getDashboard = (req, res) => {
+    res.json({message: "Welcome to the dashboard"});
 }

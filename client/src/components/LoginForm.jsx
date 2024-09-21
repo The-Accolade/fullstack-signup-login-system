@@ -21,8 +21,8 @@ function LoginForm() {
   const formValidation = () => {
     let validationErrors = {};
 
-    if (!emailInput.trim()) validationErrors.email = "Email is required";
-    if (!passwordInput.trim()) {
+    if (!email.trim()) validationErrors.email = "Email is required";
+    if (!password.trim()) {
       validationErrors.password = "Password is required";
     }
 
@@ -32,8 +32,6 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log({ email, password });
 
     if (!formValidation()) {
       return; //if the validation fails, do not submit the form
@@ -53,7 +51,6 @@ function LoginForm() {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
-
         navigate("/dashboard");
         toast(data.message);
       } else {
