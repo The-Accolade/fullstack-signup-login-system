@@ -1,10 +1,10 @@
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import RegistrationPage from "./pages/RegistrationPage";
-import SigninPage from "./pages/SigninPage";
+import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const NotFound = () => {
   return (
@@ -33,18 +33,14 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<RegistrationPage />} />
-        <Route path="/signin" element={<SigninPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/dashboard"
           element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <ToastContainer
-        autoClose={2000}
-        closeOnClick
-        theme="dark"
-      />
+      <ToastContainer autoClose={2000} closeOnClick theme="dark" />
     </div>
   );
 }

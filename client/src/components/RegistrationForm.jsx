@@ -175,7 +175,7 @@ function RegistrationForm() {
       </button>
       <p className="mt-3 font-semibold">
         Already registered?{" "}
-        <Link className="text-primary hover-links" to="/signin">
+        <Link className="text-primary hover-links" to="/login">
           Log in
         </Link>
       </p>
