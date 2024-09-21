@@ -8,6 +8,7 @@ function RegistrationForm() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -81,10 +82,10 @@ function RegistrationForm() {
       const data = await response.json();
 
       if (response.ok) {
-        console.log(data);
         localStorage.setItem("token", data.token);
+        // setTimeout(() => , 2000);
+        navigate("/dashboard");
         toast(data.message);
-        setTimeout(() => navigate("/dashboard"), 2000);
       } else {
         toast.error(data.message);
         setLoading(false);
