@@ -34,7 +34,7 @@ function LoginForm() {
     e.preventDefault();
 
     console.log({ email, password });
-    return;
+
     if (!formValidation()) {
       return; //if the validation fails, do not submit the form
     }
@@ -44,8 +44,8 @@ function LoginForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: emailInput,
-          password: passwordInput,
+          email,
+          password,
         }),
       });
 

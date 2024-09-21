@@ -34,7 +34,7 @@ export const registerUser = async (req, res) => {
 
         const payload = {
             user: {
-                id: user._id
+                id: user.id
             },
         } //sending the user id to the frontend to request for the token that jwt will provide
 
@@ -64,4 +64,41 @@ export const getUser = async (req, res) => {
     }
 }
 
-export const loginUser = (req, res) => res.send({message: "Login user"})
+export const loginUser = async (req, res) => {
+    const {email, password} = req.body;
+
+    try {
+        //Check if the user already exists. 
+        let user = await User.findOne({ email });
+        if(!user) {
+            return res.status(400).json({message: "Incorrect Credentials"});
+        }
+        //Check if the password is correct
+        const match = await bcrypt.compare(password, user.password); 
+        if(!match) {
+            return res.status(400).json({message: "Incorrect Credentials"});
+        }
+
+        const payload =  {
+            user: {
+                id: user.id,
+            }
+        }
+
+        jwt.sign(
+            payload,
+            process.env.SECRET_KEY,
+            {expiresIn: '1h'},
+            (error, token) => {
+                if(error) throw error;
+                res.json({token});       
+            }
+        )
+
+
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error");
+    }
+}
