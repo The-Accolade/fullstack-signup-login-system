@@ -99,9 +99,25 @@ function RegistrationForm() {
       setConfirmPasswordInput("");
       setLoading(false);
     } catch (error) {
-      toast("Error submitting form");
-      console.error("Error submitting the form", error);
-      setLoading(false);
+      // toast("Error submitting form");
+      // console.error("Error submitting the form", error);
+      // setLoading(false);
+
+      //if the error is 401 unauthorized and the token is expired, send an error message
+      if (
+        error.response &&
+        error.response.status === 401 &&
+        error.response.data.message === "Token is expired!"
+      ) {
+        toast("Token expired, logging out...");
+        localStorage.removeItem("token");
+        navigate("/login");
+        setLoading(false);
+      } else {
+        toast(error.response.data);
+        console.error(error.response.data);
+        setLoading(false);
+      }
     }
   };
 

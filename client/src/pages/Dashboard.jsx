@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from "react";
+import Nav from "../components/dashboard/Nav";
 
 function Dashboard() {
   return (
-    <div><h1>Welcome to the Dashboard</h1></div>
-  )
+    <div>
+      <Nav />
+    </div>
+  );
 }
 
 export default Dashboard;

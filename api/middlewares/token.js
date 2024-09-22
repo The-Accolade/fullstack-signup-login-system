@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 //verify the token
 export const authenticateJWT = (req, res, next) => {
-    const token = req.header("Authorization");
+    const token = req.header("x-auth-token");
 
     if(!token) res.status(401).json({message: "No token, authorization failed!"});
 

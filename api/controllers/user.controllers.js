@@ -34,7 +34,7 @@ export const registerUser = async (req, res) => {
 
         const payload = {
             user: {
-                id: user.id
+                id: user._id
             },
         } //sending the user id to the frontend to request for the token that jwt will provide
 
@@ -56,7 +56,7 @@ export const registerUser = async (req, res) => {
 
 export const getUser = async (req, res) => {
     try {
-        const user = await User.findById(req.body.user.id);
+        const user = await User.findById(req.user.id);
         res.json(user);
     } catch (error) {
         console.error(error.message);
@@ -79,9 +79,10 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({message: "Incorrect Credentials"});
         }
 
+
         const payload =  {
             user: {
-                id: user.id,
+                id: user._id,
             }
         }
 
